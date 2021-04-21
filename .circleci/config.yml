@@ -1,0 +1,36 @@
+version: 2.1
+
+executors:
+  basic: &default_executor
+    docker:
+      - image: cimg/base:2020.01
+jobs: 
+  save-some-cache:
+    executor: basic
+    steps:
+    - checkout
+    # Useful environment setup
+    - run: ./test.sh
+    - save_cache:
+        key: repo-{{ .Environment.CIRCLE_SHA1 }}
+        paths:
+          - 1.txt
+          - 2.txt
+          - 3.txt
+          - 4.txt
+          - 5.txt
+  restore-some-cache:
+    executor: basic
+    steps:
+    - restore_cache:
+        key: repo-{{ .Environment.CIRCLE_SHA1 }}
+    # Useful environment setup
+    - run: ls -la
+            
+workflows:
+  do-the-test: # name of your workflow
+    jobs:
+      - save-some-cache
+      - restore-some-cache:
+          requires:
+           - save-some-cache
