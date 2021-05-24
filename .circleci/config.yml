@@ -14,11 +14,7 @@ jobs:
     - save_cache:
         key: repo-{{ .Environment.CIRCLE_SHA1 }}
         paths:
-          - 1.txt
-          - 2.txt
-          - 3.txt
-          - 4.txt
-          - 5.txt
+          - pipe
   restore-some-cache:
     executor: basic
     steps:
