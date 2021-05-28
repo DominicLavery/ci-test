@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: "alpine:latest"
-        command: ['/bin/sh', '-c', 'sleep 1', "exit 1"]
+        command: ['/bin/sh', '-c', "exit 1"]
     steps:
       - run:
           name: sample name
