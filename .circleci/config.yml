@@ -11,9 +11,9 @@ jobs:
       - run: ls -la /root
       - save_cache:
           paths:
-            - test
+            - /root/project/test
             - not-real
-          key: server-dependencies-v1-3
+          key: server-dependencies-v1-4
 
   restoring:
     docker:
@@ -22,7 +22,7 @@ jobs:
       - run: id
       - restore_cache:
           keys:
-            - server-dependencies-v1-3
+            - server-dependencies-v1-4
       - run: ls -la
 
 workflows:
