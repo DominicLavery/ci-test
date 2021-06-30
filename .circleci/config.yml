@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: cypress/base:14.15.0
     steps:
+      - run: id
       - run: mkdir test
       - run: echo data > test/file.txt
       - save_cache:
@@ -16,6 +17,7 @@ jobs:
     docker:
       - image: cimg/node:14.15.1
     steps:
+      - run: id
       - restore_cache:
           keys:
             - server-dependencies-v1-1
@@ -25,4 +27,6 @@ workflows:
   do_cache:
     jobs:
       - saving
-      - restoring
+      - restoring:
+          requires:
+            - saving
