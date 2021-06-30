@@ -7,12 +7,12 @@ jobs:
       - run: id
       - run: mkdir test
       - run: echo data > test/file.txt
-      - run: chown -R 3434:3434 test
+      - run: chown -R 3434:3434 /root
       - save_cache:
           paths:
             - test
             - not-real
-          key: server-dependencies-v1-2
+          key: server-dependencies-v1-3
 
   restoring:
     docker:
@@ -21,7 +21,7 @@ jobs:
       - run: id
       - restore_cache:
           keys:
-            - server-dependencies-v1-2
+            - server-dependencies-v1-3
       - run: ls -la
 
 workflows:
