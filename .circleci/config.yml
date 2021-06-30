@@ -8,6 +8,7 @@ jobs:
       - run: mkdir test
       - run: echo data > test/file.txt
       - run: chown -R 3434:3434 /root
+      - run: ls -la /root
       - save_cache:
           paths:
             - test
