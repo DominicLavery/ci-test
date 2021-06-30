@@ -5,13 +5,11 @@ jobs:
       - image: cypress/base:14.15.0
     steps:
       - run: id
-      - run: mkdir test
-      - run: echo data > test/file.txt
-      - run: chown -R 3434:3434 /root
-      - run: ls -la /root
+      - run: mkdir -p /home/circleci/test
+      - run: echo data > /home/circleci/test/file.txt
       - save_cache:
           paths:
-            - /root/project/test
+            - /home/circleci/test
             - not-real
           key: server-dependencies-v1-4
 
