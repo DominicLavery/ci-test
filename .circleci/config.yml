@@ -11,7 +11,7 @@ jobs:
           paths:
             - /home/circleci/test
             - not-real
-          key: server-dependencies-v1-4
+          key: server-dependencies-v1-5
 
   restoring:
     docker:
@@ -20,7 +20,7 @@ jobs:
       - run: id
       - restore_cache:
           keys:
-            - server-dependencies-v1-4
+            - server-dependencies-v1-5
       - run: ls -la
 
 workflows:
