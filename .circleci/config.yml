@@ -1,10 +1,28 @@
-version: 2
+version: 2.1
 jobs:
-  build:
+  saving:
     docker:
-      - image: "alpine:latest"
-        command: ['/bin/sh', '-c', "exit 1"]
+      - image: cypress/base:14.15.0
     steps:
-      - run:
-          name: sample name
-          command: echo -n he; echo llo there
+      - run: mkdir test
+      - run: echo data > test/file.txt
+      - save_cache:
+          paths:
+            - test
+            - not-real
+          key: server-dependencies-v1-1
+
+  restoring:
+    docker:
+      - image: cimg/node:14.15.1
+    steps:
+      - restore_cache:
+          keys:
+            - server-dependencies-v1-1
+      - run: ls -la
+
+workflows:
+  do_cache:
+    jobs:
+      - saving
+      - restoring
