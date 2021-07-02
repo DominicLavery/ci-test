@@ -5,13 +5,13 @@ jobs:
       - image: cypress/base:14.15.0
     steps:
       - run: id
-      - run: mkdir -p /home/circleci/test
-      - run: echo data > /home/circleci/test/file.txt
+      - run: mkdir -p /root/test
+      - run: echo data > /root/file.txt
       - save_cache:
           paths:
-            - /home/circleci/test
+            - /root/test
             - not-real
-          key: server-dependencies-v1-5
+          key: server-dependencies-v1-6
 
   restoring:
     docker:
@@ -20,7 +20,7 @@ jobs:
       - run: id
       - restore_cache:
           keys:
-            - server-dependencies-v1-5
+            - server-dependencies-v1-6
       - run: ls -la
 
 workflows:
